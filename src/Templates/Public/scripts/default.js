@@ -58,10 +58,10 @@ $(document).ready(() => {
 });
 
 function checkAutoTheme() {
-    var bodyTheme = getPodeTheme();
-    if (bodyTheme != 'auto') {
-        return false;
-    }
+    // var bodyTheme = getPodeTheme();
+    // if (bodyTheme != 'auto') {
+    //     return false;
+    // }
 
     // check if the system is dark/light
     var isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -73,7 +73,7 @@ function checkAutoTheme() {
     document.cookie = `pode.web.theme=${systemTheme}; expires=${d.toUTCString()}; path=/`
 
     // force a refresh
-    refreshPage();
+    // refreshPage();
     return true;
 }
 

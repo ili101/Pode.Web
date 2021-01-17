@@ -124,7 +124,7 @@ function Get-PodeWebTheme
     }
 
     $theme = Get-PodeWebCookie -Name 'theme'
-    if (($null -ne $theme) -and ![string]::IsNullOrWhiteSpace($theme.Value)) {
+    if (($null -ne $theme) -and ![string]::IsNullOrWhiteSpace($theme.Value) -and (Get-PodeWebState -Name 'theme') -eq 'auto') {
         return $theme.Value.ToLowerInvariant()
     }
 
