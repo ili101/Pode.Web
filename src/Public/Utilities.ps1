@@ -35,7 +35,6 @@ function Use-PodeWebTemplates
     Set-PodeWebState -Name 'logo' -Value $Logo
     Set-PodeWebState -Name 'favicon' -Value $FavIcon
     Set-PodeWebState -Name 'theme' -Value $Theme.ToLowerInvariant()
-    Set-PodeWebState -Name 'theme-auto' -Value ($Theme -ieq 'auto')
     Set-PodeWebState -Name 'social' -Value @{}
     Set-PodeWebState -Name 'pages' -Value @()
     Set-PodeWebState -Name 'custom-css' -Value @()
@@ -119,14 +118,14 @@ function Get-PodeWebTheme
     [CmdletBinding()]
     param()
 
-    $theme = Get-PodeWebAuthTheme -AuthData (Get-PodeWebAuthData)
-    if (![string]::IsNullOrWhiteSpace($theme)) {
-        return $theme.ToLowerInvariant()
-    }
-
     $theme = Get-PodeWebCookie -Name 'theme'
     if (($null -ne $theme) -and ![string]::IsNullOrWhiteSpace($theme.Value)) {
         return $theme.Value.ToLowerInvariant()
+    }
+
+    $theme = Get-PodeWebAuthTheme -AuthData (Get-PodeWebAuthData)
+    if (![string]::IsNullOrWhiteSpace($theme)) {
+        return $theme.ToLowerInvariant()
     }
 
     return (Get-PodeWebState -Name 'theme').ToLowerInvariant()
