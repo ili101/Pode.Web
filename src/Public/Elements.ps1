@@ -1577,6 +1577,10 @@ function New-PodeWebTable
                 $result = @()
             }
 
+            if ($result -isnot [System.Collections.IList]) {
+                $result = @($result)
+            }
+
             if (($result.Length -gt 0) -and [string]::IsNullOrWhiteSpace($result[0].OutputType)) {
                 $paginate = $ElementData.Paging.Enabled
                 $result = ($result | Out-PodeWebTable -Id $using:Id -Columns $ElementData.Columns -Paginate:$paginate)
